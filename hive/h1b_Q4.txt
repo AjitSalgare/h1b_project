@@ -1,0 +1,58 @@
+4)Which top 5 employers file the most petitions each year? - Case Status - ALL
+ (using hive)
+hive> select year,employer_name,count(year) as cnt from h1b_final group by year employer_name order by cnt desc limit 5;
+FAILED: ParseException line 1:74 missing EOF at 'employer_name' near 'year'
+hive> select year,employer_name,count(year) as cnt from h1b_final group by year, employer_name order by cnt desc limit 5;
+Query ID = hduser_20171018175659_362e0454-cc16-4dff-a8fe-a0291a5c3c5d
+Total jobs = 2
+Launching Job 1 out of 2
+Number of reduce tasks not specified. Estimated from input data size: 2
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 17:57:01,083 Stage-1 map = 0%,  reduce = 0%
+2017-10-18 17:57:07,103 Stage-1 map = 33%,  reduce = 0%
+2017-10-18 17:57:08,105 Stage-1 map = 100%,  reduce = 0%
+2017-10-18 17:57:14,136 Stage-1 map = 100%,  reduce = 50%
+2017-10-18 17:57:15,142 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local1497641901_0003
+Launching Job 2 out of 2
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 17:57:16,624 Stage-2 map = 0%,  reduce = 0%
+2017-10-18 17:57:18,647 Stage-2 map = 100%,  reduce = 0%
+2017-10-18 17:57:19,650 Stage-2 map = 100%,  reduce = 100%
+Ended Job = job_local2035789745_0004
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 3417504633 HDFS Write: 0 SUCCESS
+Stage-Stage-2:  HDFS Read: 1799463420 HDFS Write: 0 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+
+Output:
+year 2012
+
+(INFOSYS LIMITED,2012)	15818
+(WIPRO LIMITED,2012)	7182
+(TATA CONSULTANCY SERVICES LIMITED,2012)	6735
+(DELOITTE CONSULTING LLP,2012)	4727
+(IBM INDIA PRIVATE LIMITED,2012)	4074
+
+
+year 2013
+
+(INFOSYS LIMITED,2014)	23759
+(TATA CONSULTANCY SERVICES LIMITED,2014)	14098
+(WIPRO LIMITED,2014)	8365
+(DELOITTE CONSULTING LLP,2014)	7017
+(ACCENTURE LLP,2014)	5498

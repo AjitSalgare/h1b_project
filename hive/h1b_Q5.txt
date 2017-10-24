@@ -1,0 +1,366 @@
+5) Find the most popular top 10 job positions for H1B visa applications for each year?
+
+a) for all the applications
+
+Ans:
+
+Year=2011
+hive> select job_title,count(job_title) as cnt,year from h1b_final where year =='2011' group by year,job_title order by cnt desc limit 10;
+Query ID = hduser_20171018180710_02382279-8bc2-4346-82aa-12a39a79ea35
+Total jobs = 2
+Launching Job 1 out of 2
+Number of reduce tasks not specified. Estimated from input data size: 2
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 18:07:11,806 Stage-1 map = 0%,  reduce = 0%
+2017-10-18 18:07:13,811 Stage-1 map = 100%,  reduce = 0%
+2017-10-18 18:07:17,840 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local155577283_0005
+Launching Job 2 out of 2
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 18:07:19,323 Stage-2 map = 100%,  reduce = 100%
+Ended Job = job_local1174396054_0006
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 5216968053 HDFS Write: 0 SUCCESS
+Stage-Stage-2:  HDFS Read: 2699195130 HDFS Write: 0 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+PROGRAMMER ANALYST	31799	2011
+SOFTWARE ENGINEER	12763	2011
+COMPUTER PROGRAMMER	8998	2011
+SYSTEMS ANALYST	8644	2011
+BUSINESS ANALYST	3891	2011
+COMPUTER SYSTEMS ANALYST	3698	2011
+ASSISTANT PROFESSOR	3467	2011
+PHYSICAL THERAPIST	3377	2011
+SENIOR SOFTWARE ENGINEER	2935	2011
+SENIOR CONSULTANT	2798	2011
+
+------------------------------------------------------------------
+
+YEAR=2012
+hive> select job_title,count(job_title) as cnt,year from h1b_final where year =='2012' group by year,job_title order by cnt desc limit 10;
+Query ID = hduser_20171018181223_f921a74d-9be0-401c-a899-ca78cb18f0c9
+Total jobs = 2
+Launching Job 1 out of 2
+Number of reduce tasks not specified. Estimated from input data size: 2
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 18:12:24,639 Stage-1 map = 0%,  reduce = 0%
+2017-10-18 18:12:26,644 Stage-1 map = 100%,  reduce = 0%
+2017-10-18 18:12:28,659 Stage-1 map = 50%,  reduce = 0%
+2017-10-18 18:12:29,664 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local1066328847_0007
+Launching Job 2 out of 2
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 18:12:31,199 Stage-2 map = 100%,  reduce = 100%
+Ended Job = job_local1037328093_0008
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 7016431473 HDFS Write: 0 SUCCESS
+Stage-Stage-2:  HDFS Read: 3598926840 HDFS Write: 0 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+PROGRAMMER ANALYST	33066	2012
+SOFTWARE ENGINEER	14437	2012
+COMPUTER PROGRAMMER	9629	2012
+SYSTEMS ANALYST	9296	2012
+BUSINESS ANALYST	4752	2012
+COMPUTER SYSTEMS ANALYST	4706	2012
+SOFTWARE DEVELOPER	3895	2012
+PHYSICAL THERAPIST	3871	2012
+ASSISTANT PROFESSOR	3801	2012
+SENIOR CONSULTANT	3737	2012
+-------------------------------------------------------------------------------------------------------------------------
+
+
+YEAR=2013
+hive> select job_title,count(job_title) as cnt,year from h1b_final where year =='2013' group by year,job_title order by cnt desc limit 10;
+Query ID = hduser_20171018181337_e3163651-bc26-4e8a-abd6-b28fd5822ab4
+Total jobs = 2
+Launching Job 1 out of 2
+Number of reduce tasks not specified. Estimated from input data size: 2
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 18:13:39,226 Stage-1 map = 0%,  reduce = 0%
+2017-10-18 18:13:41,233 Stage-1 map = 100%,  reduce = 0%
+2017-10-18 18:13:44,246 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local2070857226_0009
+Launching Job 2 out of 2
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 18:13:45,717 Stage-2 map = 100%,  reduce = 100%
+Ended Job = job_local2121467462_0010
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 8815894893 HDFS Write: 0 SUCCESS
+Stage-Stage-2:  HDFS Read: 4498658550 HDFS Write: 0 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+PROGRAMMER ANALYST	33880	2013
+SOFTWARE ENGINEER	15680	2013
+COMPUTER PROGRAMMER	11271	2013
+SYSTEMS ANALYST	8714	2013
+TECHNOLOGY LEAD - US	7853	2013
+TECHNOLOGY ANALYST - US	7683	2013
+BUSINESS ANALYST	5716	2013
+COMPUTER SYSTEMS ANALYST	5043	2013
+SOFTWARE DEVELOPER	5026	2013
+SENIOR CONSULTANT	4326	2013
+-------------------------------------------------------------------------------------------------------------------------
+YEAR=2014
+hive> select job_title,count(job_title) as cnt,year from h1b_final where year =='2014' group by year,job_title order by cnt desc limit 10;
+Query ID = hduser_20171018181459_a1ca28cc-7962-4cc4-8ea0-aa55cbe9c0e2
+Total jobs = 2
+Launching Job 1 out of 2
+Number of reduce tasks not specified. Estimated from input data size: 2
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 18:15:01,039 Stage-1 map = 0%,  reduce = 0%
+2017-10-18 18:15:04,045 Stage-1 map = 100%,  reduce = 0%
+2017-10-18 18:15:06,052 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local360855883_0011
+Launching Job 2 out of 2
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 18:15:07,422 Stage-2 map = 100%,  reduce = 100%
+Ended Job = job_local1335606631_0012
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 10615358313 HDFS Write: 0 SUCCESS
+Stage-Stage-2:  HDFS Read: 5398390260 HDFS Write: 0 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+PROGRAMMER ANALYST	43114	2014
+SOFTWARE ENGINEER	20500	2014
+COMPUTER PROGRAMMER	14950	2014
+SYSTEMS ANALYST	10194	2014
+SOFTWARE DEVELOPER	7337	2014
+BUSINESS ANALYST	7302	2014
+COMPUTER SYSTEMS ANALYST	6821	2014
+TECHNOLOGY LEAD - US	5057	2014
+TECHNOLOGY ANALYST - US	4913	2014
+SENIOR CONSULTANT	4898	2014
+--------------------------------------------------------------------------------------------------------------------------
+YEAR=2015
+hive> select job_title,count(job_title) as cnt,year from h1b_final where year =='2015' group by year,job_title order by cnt desc limit 10;
+Query ID = hduser_20171018181607_92c6f248-a5ee-4220-824d-9e9e56c5c51b
+Total jobs = 2
+Launching Job 1 out of 2
+Number of reduce tasks not specified. Estimated from input data size: 2
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 18:16:09,274 Stage-1 map = 0%,  reduce = 0%
+2017-10-18 18:16:12,281 Stage-1 map = 100%,  reduce = 0%
+2017-10-18 18:16:15,308 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local874279348_0013
+Launching Job 2 out of 2
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 18:16:16,699 Stage-2 map = 100%,  reduce = 100%
+Ended Job = job_local531813301_0014
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 12414821733 HDFS Write: 0 SUCCESS
+Stage-Stage-2:  HDFS Read: 6298121970 HDFS Write: 0 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+PROGRAMMER ANALYST	53436	2015
+SOFTWARE ENGINEER	27259	2015
+COMPUTER PROGRAMMER	14054	2015
+SYSTEMS ANALYST	12803	2015
+SOFTWARE DEVELOPER	10441	2015
+BUSINESS ANALYST	8853	2015
+TECHNOLOGY LEAD - US	8242	2015
+COMPUTER SYSTEMS ANALYST	7918	2015
+TECHNOLOGY ANALYST - US	7014	2015
+SENIOR SOFTWARE ENGINEER	6013	2015
+-------------------------------------------------------------------------------------------------------------------------
+YEAR=2016
+hive> select job_title,count(job_title) as cnt,year from h1b_final where year =='2016' group by year,job_title order by cnt desc limit 10;
+Query ID = hduser_20171018181722_3cc312a0-13f5-4ab9-b3b1-0f6a93b3bd9f
+Total jobs = 2
+Launching Job 1 out of 2
+Number of reduce tasks not specified. Estimated from input data size: 2
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 18:17:24,000 Stage-1 map = 0%,  reduce = 0%
+2017-10-18 18:17:28,010 Stage-1 map = 100%,  reduce = 0%
+2017-10-18 18:17:30,024 Stage-1 map = 100%,  reduce = 50%
+2017-10-18 18:17:31,029 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local468071267_0015
+Launching Job 2 out of 2
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 18:17:32,378 Stage-2 map = 100%,  reduce = 100%
+Ended Job = job_local1872084903_0016
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 14214285153 HDFS Write: 0 SUCCESS
+Stage-Stage-2:  HDFS Read: 7197853680 HDFS Write: 0 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+PROGRAMMER ANALYST	53743	2016
+SOFTWARE ENGINEER	30668	2016
+SOFTWARE DEVELOPER	14041	2016
+SYSTEMS ANALYST	12314	2016
+COMPUTER PROGRAMMER	11668	2016
+BUSINESS ANALYST	9167	2016
+COMPUTER SYSTEMS ANALYST	6900	2016
+SENIOR SOFTWARE ENGINEER	6439	2016
+DEVELOPER	6084	2016
+TECHNOLOGY LEAD - US	5410	2016
+--------------------------------------------------------------------------------------------------------------------------
+b) for only certified applications.
+
+YEAR=2011
+hive> select job_title,count(job_title) as cnt,year from h1b_final where year =='2011'And case_status == 'CERTIFIED' group by year,job_title order by cnt desc limit 10;
+Query ID = hduser_20171018182103_4af89f03-a78f-4c20-9d4f-9ee2346fb48a
+Total jobs = 2
+Launching Job 1 out of 2
+Number of reduce tasks not specified. Estimated from input data size: 2
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 18:21:04,782 Stage-1 map = 0%,  reduce = 0%
+2017-10-18 18:21:06,784 Stage-1 map = 100%,  reduce = 0%
+2017-10-18 18:21:08,791 Stage-1 map = 100%,  reduce = 50%
+2017-10-18 18:21:09,797 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local1574230234_0017
+Launching Job 2 out of 2
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 18:21:11,058 Stage-2 map = 100%,  reduce = 100%
+Ended Job = job_local906853177_0018
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 16013748573 HDFS Write: 0 SUCCESS
+Stage-Stage-2:  HDFS Read: 8097585390 HDFS Write: 0 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+PROGRAMMER ANALYST	28806	2011
+SOFTWARE ENGINEER	11224	2011
+COMPUTER PROGRAMMER	8038	2011
+SYSTEMS ANALYST	7850	2011
+BUSINESS ANALYST	3444	2011
+COMPUTER SYSTEMS ANALYST	3152	2011
+ASSISTANT PROFESSOR	3050	2011
+PHYSICAL THERAPIST	2911	2011
+SENIOR SOFTWARE ENGINEER	2595	2011
+SENIOR CONSULTANT	2585	2011
+-------------------------------------------------------------------------------------------------------------------------
+YEAR=2012
+hive> select job_title,count(job_title) as cnt,year from h1b_final where year =='2012'And case_status == 'CERTIFIED' group by year,job_title order by cnt desc limit 10;
+Query ID = hduser_20171018182244_bd7254ae-54c7-4426-9a37-3f0c8c922664
+Total jobs = 2
+Launching Job 1 out of 2
+Number of reduce tasks not specified. Estimated from input data size: 2
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 18:22:46,193 Stage-1 map = 0%,  reduce = 0%
+2017-10-18 18:22:48,199 Stage-1 map = 100%,  reduce = 0%
+2017-10-18 18:22:51,208 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local561541751_0019
+Launching Job 2 out of 2
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 18:22:52,501 Stage-2 map = 100%,  reduce = 100%
+Ended Job = job_local190299792_0020
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 17813211993 HDFS Write: 0 SUCCESS
+Stage-Stage-2:  HDFS Read: 8997317100 HDFS Write: 0 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+PROGRAMMER ANALYST	29226	2012
+SOFTWARE ENGINEER	12273	2012
+COMPUTER PROGRAMMER	8483	2012
+SYSTEMS ANALYST	8399	2012
+BUSINESS ANALYST	4144	2012
+COMPUTER SYSTEMS ANALYST	4084	2012
+SENIOR CONSULTANT	3420	2012
+SOFTWARE DEVELOPER	3290	2012
+PHYSICAL THERAPIST	3284	2012
+ASSISTANT PROFESSOR	3033	2012

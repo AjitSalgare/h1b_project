@@ -1,0 +1,246 @@
+10) Which are the  job positions along with the number of petitions which have the success rate more than 70%  in petitions (total petitions filed 1000 OR more than 1000)? (using mapreduces)
+
+Program:
+package Query10;
+
+import java.io.IOException;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.io.NullWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Reducer;
+import java.util.TreeMap;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+
+
+public class Q10mapper extends Mapper<LongWritable, Text, Text, Text>{
+		public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException
+		{
+			String parts[] =value.toString().split(",");
+			String status = parts[1];
+			String jobposition =parts[4];
+			context.write(new Text(jobposition), new Text(status));
+		}
+	}
+
+public  class Q10reducer extends Reducer<Text,Text,NullWritable,Text>{
+	private TreeMap<Double, String> topten = new TreeMap<>();
+	public void reduce(Text key, Iterable<Text> value, Context context) throws IOException, InterruptedException{
+		 double total =0;
+		 double successrate=0;
+		 for (Text val:value)
+		 {
+			 String status = val.toString();
+			 if(status.equals("\"CERTIFIED\"") || status.equals("\"CERTIFIED WITHDRAWN\""))
+			 {
+				total++ ;
+			    successrate++;
+			 }
+			    else 
+			    	total++;
+		 }
+		 
+		double rate = (successrate/total)*100;
+		
+		
+		if(rate >=70 && total >=1000){
+		String op = key.toString()+ ","+ String.format("%.0f",total)+ "," +String.format("%f %%",rate);
+		topten.put(rate, op);
+		
+		}
+				 
+	}
+	protected void cleanup(Context context) throws IOException, InterruptedException{
+		for(String val : topten.descendingMap().values()){
+			context.write(NullWritable.get(),new Text(val));
+		}
+			
+	
+	}
+}
+
+public class Q10driver {
+
+
+	public static void main(String[] args) throws Exception
+	{
+		Configuration conf =new Configuration();
+		conf.set("mapreduce.output.textoutputformat.separator", ",");
+		Job job=Job.getInstance(conf);
+		job.setJarByClass(Q10driver.class);
+		//job.setJobName("POSJoin");
+		job.setMapperClass(Q10mapper.class);
+		//job.addCacheFile(new Path("AFINN.txt").toUri());
+		//job.setNumReduceTasks(0);
+		job.setReducerClass(Q10reducer.class);
+		job.setOutputKeyClass(NullWritable.class);
+		job.setOutputValueClass(Text.class);
+		job.setMapOutputKeyClass(Text.class);
+		job.setMapOutputValueClass(Text.class);
+		
+		FileInputFormat.addInputPath(job, new Path(args[0]));
+		FileOutputFormat.setOutputPath(job,new Path(args[1]));
+		System.exit(job.waitForCompletion(true) ? 0 : 1);
+	}
+}
+
+Output:
+"TEST ANALYST - US",1023,100.000000 %
+"ASSOCIATE CONSULTANT - US",4392,99.908925 %
+"PRODUCTION SUPPORT ANALYST - US",1451,99.862164 %
+"SYSTEMS ENGINEER - US",10026,99.840415 %
+"CONSULTANT - US",7413,99.797653 %
+"TECHNOLOGY LEAD - US",28234,99.762697 %
+"TECHNOLOGY ANALYST - US",26028,99.731059 %
+"PROJECT MANAGER - US",7002,99.685804 %
+"LEAD CONSULTANT - US",3394,99.646435 %
+"DEVELOPER USER INTERFACE",5247,99.599771 %
+"PRINCIPAL CONSULTANT - US",1349,99.481097 %
+"ASSURANCE STAFF",2317,99.050496 %
+"COMPUTER PROGRAMMER/CONFIGURER 2",6727,98.914821 %
+"COMPUTER SYSTEMS ANALYST 2",4027,98.808046 %
+"COMPUTER SYSTEMS ANALYST 3",2168,98.708487 %
+"ADVISORY SENIOR",5343,98.633726 %
+"COMPUTER PROGRAMMER / CONFIGURER 2",1276,98.510972 %
+"COMPUTER PROGRAMMER/CONFIGURER 3",1145,98.427948 %
+"BUSINESS TECHNOLOGY ANALYST",1817,98.293891 %
+"ADVISORY MANAGER",3204,98.252185 %
+"AUDIT SENIOR",1021,98.237023 %
+"MODULE LEAD",2128,98.120301 %
+"AUDIT ASSISTANT",1203,98.088113 %
+"ADVISORY STAFF",2363,97.968684 %
+"ERS SENIOR CONSULTANT",2158,97.914736 %
+"TAX SENIOR",1795,97.883008 %
+"ADVISORY SENIOR ASSOCIATE",1306,97.473201 %
+"DEVELOPER",10041,97.340902 %
+"ERS CONSULTANT",2068,96.953578 %
+"COMPUTER SYSTEMS ENGINEER",3049,96.851427 %
+"ASSURANCE SENIOR",1577,96.131896 %
+"LEAD CONSULTANT",1759,96.020466 %
+"COMPUTER USER SUPPORT SPECIALISTS",1246,95.345104 %
+"WEB DEVELOPER",5543,95.273318 %
+"PROJECT LEAD",1407,94.669510 %
+"SYSTEMS ANALYSTS",1026,94.639376 %
+"CONSULTANT",9786,94.277539 %
+"MANAGER",4366,94.159414 %
+"TECHNICAL ANALYST",2034,93.805310 %
+"SENIOR ASSOCIATE",2396,93.405676 %
+"SENIOR SYSTEMS ANALYST",4031,93.301910 %
+ All Other*",21082,93.259653 %
+"SENIOR CONSULTANT",12096,92.402447 %
+"SENIOR PROGRAMMER ANALYST",2535,92.071006 %
+"BUSINESS SYSTEM ANALYST",3806,91.854966 %
+"TECHNICAL CONSULTANT",1541,91.823491 %
+"COMPUTER PROGRAMMER",48071,91.516715 %
+"INDUSTRIAL DESIGNER",3034,91.397495 %
+"NETWORK AND COMPUTER SYSTEMS ADMINISTRATOR",1296,91.126543 %
+"PHARMACIST",2827,90.979837 %
+"SENIOR BUSINESS ANALYST",1431,90.705800 %
+"SYSTEM ADMINISTRATOR",4004,90.509491 %
+"SYSTEMS ADMINISTRATOR",2634,90.356872 %
+"COMPUTER SYSTEMS ANALYSTS",73669,90.131534 %
+"PROJECT MANAGER",8476,90.030675 %
+"MANAGEMENT ANALYSTS",9501,90.001053 %
+"SENIOR SYSTEMS ANALYST JC60",3068,89.928292 %
+"SR. PROGRAMMER ANALYST",1169,89.905902 %
+"Computer Systems Analysts",106356,89.675242 %
+"COMPUTER OCCUPATIONS,32397,89.532981 %
+"SALES ENGINEERS",2168,89.529520 %
+"DATABASE ADMINISTRATORS",8118,89.443213 %
+"ENGINEER",2113,89.398959 %
+"BUSINESS ANALYST",19842,89.396230 %
+"Computer Occupations,26326,89.386918 %
+"COMPUTER SYSTEMS ANALYST",20191,89.376455 %
+"DATABASE ADMINISTRATOR",9780,89.325153 %
+"PROGRAMMER ANALYST",128216,89.217414 %
+ ALL OTHER",99213,89.174806 %
+ SYSTEMS SOFTWARE",22736,88.929451 %
+"NETWORK AND COMPUTER SYSTEMS ADMINISTRATORS",9468,88.857203 %
+"SYSTEMS ANALYST",30870,88.697765 %
+"COMPUTER PROGRAMMERS",60674,88.678841 %
+"NETWORK ADMINISTRATOR",1579,88.663711 %
+"SOFTWARE DEVELOPERS,118923,88.600187 %
+"DESIGN ENGINEER",2488,88.585209 %
+"PHYSICIANS AND SURGEONS,3390,88.554572 %
+"SENIOR SOFTWARE DEVELOPER",1642,88.550548 %
+"INTERNISTS,1602,88.514357 %
+"JAVA DEVELOPER",1169,88.451668 %
+ Web Developers,2068,88.442940 %
+"PHYSICAL THERAPISTS",5471,88.393347 %
+"MANAGER JC50",1868,88.383298 %
+"Software Developers,118922,88.334370 %
+"BUSINESS SYSTEMS ANALYST",4571,88.273901 %
+"COMPUTER AND INFORMATION SYSTEMS MANAGERS",4807,88.163095 %
+ Systems Software",32288,88.162785 %
+"SYSTEM ANALYST",2573,88.146133 %
+"DATA ANALYST",1440,88.125000 %
+"COMPUTER PROGRAMMER ANALYST",6179,88.104871 %
+ Except Special Educati",6102,88.069485 %
+"QA ANALYST",1631,88.044145 %
+"PROGRAMMER ANALYST LEVEL 1",2386,88.013412 %
+"WEB DEVELOPERS",1431,87.980433 %
+ All Other",94241,87.944737 %
+"Network and Computer Systems Administrators*",3509,87.888287 %
+"Speech-Language Pathologists",1254,87.878788 %
+"ELECTRICAL ENGINEERS",5713,87.817259 %
+"MECHANICAL ENGINEERS",9943,87.810520 %
+"PROGRAM MANAGER",1027,87.731256 %
+ PC",1075,87.627907 %
+"TECHNICAL LEAD",2484,87.560386 %
+"PROGRAMMER",2660,87.556391 %
+"SENIOR SOFTWARE ENGINEER",1625,87.507692 %
+"CHEMISTS",1857,87.506731 %
+"ANALYST",7559,87.471888 %
+ APPLICATIONS",117676,87.454536 %
+"PROGRAMMER/ANALYST",3108,87.419562 %
+"SOFTWARE ENGINEER",4327,87.404668 %
+"Management Analysts",14400,87.388889 %
+"SYSTEMS ANALYST JC65",3321,87.383318 %
+"Computer Programmers",86556,87.331901 %
+ EXCEPT SPECIAL",2357,87.314383 %
+ ALL",1168,87.243151 %
+"SENIOR ENGINEER",1037,87.174542 %
+",5868,87.116564 %
+"Network and Computer Systems Administrators",8268,87.034349 %
+"LOGISTICIANS",1511,87.028458 %
+"Database Administrators",10159,86.986908 %
+ GENERAL",3557,86.955299 %
+"ACCOUNTANTS AND AUDITORS",6259,86.930820 %
+"SYSTEMS ENGINEER",1457,86.890872 %
+"SOFTWARE PROGRAMMER",1067,86.691659 %
+ Applications",107447,86.585945 %
+"Credit Analysts",1057,86.565752 %
+"INFORMATION SECURITY ANALYSTS",1302,86.482335 %
+"STATISTICIANS",3583,86.463857 %
+"Mechanical Engineers",14029,86.449497 %
+"ENGINEERS,2786,86.396267 %
+"PROJECT ENGINEER",1739,86.371478 %
+"ARCHITECTURAL AND ENGINEERING MANAGERS",1467,86.366735 %
+"MATERIALS ENGINEERS",1127,86.335404 %
+"MARKET RESEARCH ANALYSTS AND MARKETING SPECIALISTS",7079,86.297500 %
+"MEDICAL TECHNOLOGIST",2569,86.259245 %
+ Except Special and Career/",1398,86.194564 %
+ EXCEPT COMPUTER",5706,86.172450 %
+"SALES MANAGERS",1092,86.172161 %
+"OCCUPATIONAL THERAPIST",1552,86.146907 %
+"ASSOCIATE",7081,86.131902 %
+"Statisticians",4009,86.106261 %
+"Computer Hardware Engineers",1755,86.096866 %
+"ELECTRONICS ENGINEERS,7549,86.024639 %
+"Family and General Practitioners",1706,85.990621 %
+"Physical Therapists",9962,85.976712 %
+"OPERATIONS RESEARCH ANALYSTS",6623,85.942926 %
+"Sales Engineers",3205,85.897036 %
+"PHYSICAL THERAPIST",5968,85.891421 %
+"MANAGER,3677,85.749252 %
+"Chemists",3459,85.747326 %
+"INDUSTRIAL ENGINEERS",3153,85.696162 %
+"Architectural and Engineering Managers",2284,85.683012 %
+"Computer and Information Systems Managers",7025,85.679715 %
+"Pharmacists",3961,85.584448 %
+"GRAPHIC DESIGNERS",2157,85.442745 %
+"CIVIL ENGINEERS",3525,85.390071 %

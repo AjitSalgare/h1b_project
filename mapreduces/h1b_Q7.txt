@@ -1,0 +1,83 @@
+7) Create a bar graph to depict the number of applications for each year [All]
+  (using mapreduces)
+
+Program:
+
+package h1b_Q7;
+
+import java.io.*;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.conf.*;
+import org.apache.hadoop.fs.*;
+import org.apache.hadoop.mapreduce.lib.input.*;
+import org.apache.hadoop.mapreduce.lib.output.*;
+
+public class h1b_data
+{
+	 public static class mymap extends Mapper<LongWritable,Text, Text,IntWritable>
+	 {
+		public void map (LongWritable key,Text val,Context context) throws InterruptedException,IOException
+		{
+			String[] colum = val.toString().split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+			String year=colum[7];
+			
+			
+	                int count =1;
+	               context.write(new Text(year), new IntWritable(count));
+	
+
+		}
+		
+	 }
+	 public  static class myreduce extends Reducer<Text,IntWritable,Text,IntWritable> 
+	 {
+		 public void reduce (Text key,Iterable<IntWritable>val,Context context)throws InterruptedException,IOException
+		 {
+			 int count=0;
+			 for(IntWritable T:val)
+			 {
+				 count++;
+				
+			 }
+			 context.write(key,new IntWritable(count));
+		 }
+	 }
+	 
+	 
+	 public static void main(String[] args) throws Exception
+	 {
+		    Configuration conf = new Configuration();
+		    
+		    Job job = new Job(conf, "h1b_data");
+		    job.setJarByClass(h1b_data.class);
+		    job.setMapperClass(mymap.class);
+		    job.setReducerClass(myreduce.class);
+	        job.setMapOutputKeyClass(Text.class);
+		    job.setMapOutputValueClass(IntWritable.class);
+		    job.setNumReduceTasks(1);
+		    job.setOutputKeyClass(Text.class);
+		    job.setOutputValueClass(IntWritable.class);
+	        job.setInputFormatClass(TextInputFormat.class);
+		    job.setOutputFormatClass(TextOutputFormat.class);
+		    FileInputFormat.addInputPath(job, new Path(args[0]));
+		    FileOutputFormat.setOutputPath(job, new Path(args[1]));
+		    System.exit(job.waitForCompletion(true) ? 0 : 1);
+		  }
+}
+
+
+
+Output:
+
+2011   358767
+2012   415607
+2013   442114
+2014   519427
+2015   618727
+2016   647803
+

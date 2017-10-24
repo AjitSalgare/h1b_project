@@ -1,0 +1,98 @@
+
+3)Which industry(SOC_NAME) has the most number of Data Scientist positions? [certified] (using hive)
+Ans:
+hive> select soc_name,count(soc_name) as cnt from h1b_final where job_title == 'DATA SCIENTIST' AND case_status == 'CERTIFIED' group by soc_name order by cnt desc;
+Query ID = hduser_20171018174038_7563aac8-553c-42c6-9299-4e1f8c78b41d
+Total jobs = 2
+Launching Job 1 out of 2
+Number of reduce tasks not specified. Estimated from input data size: 2
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 17:40:47,449 Stage-1 map = 0%,  reduce = 0%
+2017-10-18 17:41:09,105 Stage-1 map = 17%,  reduce = 0%
+2017-10-18 17:41:30,173 Stage-1 map = 100%,  reduce = 0%
+2017-10-18 17:41:36,455 Stage-1 map = 50%,  reduce = 0%
+2017-10-18 17:41:48,877 Stage-1 map = 70%,  reduce = 0%
+2017-10-18 17:41:57,034 Stage-1 map = 100%,  reduce = 0%
+2017-10-18 17:41:58,059 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local1310125937_0001
+Launching Job 2 out of 2
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2017-10-18 17:42:00,397 Stage-2 map = 100%,  reduce = 100%
+Ended Job = job_local438169756_0002
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 1618041213 HDFS Write: 0 SUCCESS
+Stage-Stage-2:  HDFS Read: 899731710 HDFS Write: 0 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+STATISTICIANS	369
+COMPUTER AND INFORMATION RESEARCH SCIENTISTS	283
+OPERATIONS RESEARCH ANALYSTS	237
+Computer and Information Research Scientists	115
+COMPUTER OCCUPATIONS, ALL OTHER	113
+MATHEMATICIANS	107
+Statisticians	92
+SOFTWARE DEVELOPERS, APPLICATIONS	64
+COMPUTER SYSTEMS ANALYSTS	59
+Operations Research Analysts	55
+SOFTWARE DEVELOPERS, SYSTEMS SOFTWARE	31
+Software Developers, Applications	30
+Computer Occupations, All Other	22
+Computer Systems Analysts	17
+Software Developers, Systems Software	11
+Mathematicians	8
+NA	8
+Database Administrators	7
+MATHEMATICAL TECHNICIANS	7
+MARKET RESEARCH ANALYSTS AND MARKETING SPECIALISTS	7
+DATABASE ADMINISTRATORS	5
+ECONOMISTS	5
+FINANCIAL SPECIALISTS, ALL OTHER	5
+BIOLOGICAL SCIENTISTS, ALL OTHER	5
+COMPUTER PROGRAMMERS	4
+COMPUTER AND INFORMATION SYSTEMS MANAGERS	3
+INDUSTRIAL-ORGANIZATIONAL PSYCHOLOGISTS	3
+Biological Scientists, All Other	2
+COMPUTER NETWORK ARCHITECTS	2
+SALES ENGINEERS	2
+Computer Programmers	2
+ELECTRICAL ENGINEERS	2
+Economists	2
+Management Analysts	2
+ENGINEERS, ALL OTHER	2
+SURVEY RESEARCHERS	2
+Survey Researchers	1
+SOFTWARE DEVELOPERS, APPLICATIONS, R&D	1
+Materials Scientists	1
+Market Research Analysts and Marketing Specialists	1
+MATERIALS SCIENTISTS	1
+Engineers, All Other	1
+Computer Software Engineers, Applications	1
+COMPUTER SYSTEMS ANALYST	1
+COMPUTER & INFORMATION RESEARCH SCIENTISTS	1
+CLINICAL DATA MANAGERS	1
+CIVIL ENGINEERS	1
+ACTUARIES	1
+MEDICAL SCIENTISTS, EXCEPT EPIDEMIOLOGISTS	1
+MATERIALS ENGINEERS	1
+MANAGEMENT ANALYSTS	1
+Life Scientists, All Other	1
+Financial Analysts	1
+Electrical Engineers	1
+Credit Analysts	1
+Computer and Information Scientists, Research	1
+COMPUTER & INFORMATION RESEARCH SCIENTIST	1
+BUSINESS INTELLIGENCE ANALYSTS	1
+

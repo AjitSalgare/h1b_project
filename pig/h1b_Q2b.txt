@@ -1,0 +1,100 @@
+2b) find top 5 locations in the US who have got certified visa for each year.[certified] (using pig)
+
+Commands:
+location = load '/home/shubha/PROJECT/h1b.csv' using CSV_Storage() as
+(s_no: int,case_status: chararray, employer_name: chararray, soc_name: chararray, job_title: chararray, full_time_position: chararray,prevailing_wage: int,year: chararray,
+worksite: chararray, longitude: double, latitute: double);
+
+location1 = foreach location generate $8, $1, $7;
+location2 = filter location1 by $1 == 'CERTIFIED';
+
+
+
+location3_2011 = filter location2  by $2 =='2011';
+location3_2012 = filter location2  by $2 =='2012';
+location3_2013 = filter location2  by $2 =='2013';
+location3_2014 = filter location2  by $2 =='2014';
+location3_2015 = filter location2  by $2 =='2015';
+location3_2016 = filter location2  by $2 =='2016';
+
+
+location4_2011 = group location3_2011 by ($0,$1,$2);
+location4_2012 = group location3_2012 by ($0,$1,$2);
+location4_2013 = group location3_2013 by ($0,$1,$2);
+location4_2014 = group location3_2014 by ($0,$1,$2);
+location4_2015 = group location3_2015 by ($0,$1,$2);
+location4_2016 = group location3_2016 by ($0,$1,$2);
+
+location5_2011 = foreach location4_2011 generate group, COUNT(location3_2011.$1);
+location5_2012 = foreach location4_2012 generate group, COUNT(location3_2012.$1);
+location5_2013 = foreach location4_2013 generate group, COUNT(location3_2013.$1);
+location5_2014 = foreach location4_2014 generate group, COUNT(location3_2014.$1);
+location5_2015 = foreach location4_2015 generate group, COUNT(location3_2015.$1);
+location5_2016 = foreach location4_2016 generate group, COUNT(location3_2016.$1);
+
+
+desc2011 = order location5_2011 by $1 desc;
+desc2012 = order location5_2012 by $1 desc;
+desc2013 = order location5_2013 by $1 desc;
+desc2014 = order location5_2014 by $1 desc;
+desc2015 = order location5_2015 by $1 desc;
+desc2016 = order location5_2016 by $1 desc;
+
+limit1 = limit g_desc2011 5;
+limit2 = limit g_desc2012 5;
+limit3 = limit g_desc2013 5;
+limit4 = limit g_desc2014 5;
+limit5 = limit g_desc2015 5;
+limit6 = limit g_desc2016 5;
+
+top5_location_ans = UNION limit1, limit2, limit3, limit4, limit5, limit6;
+
+dump top5_location_ans;
+
+Output:
+year 2016
+(NEW YORK, NEW YORK,CERTIFIED,2012),23737
+(HOUSTON, TEXAS,CERTIFIED,2012),9963
+(SAN FRANCISCO, CALIFORNIA,CERTIFIED,2012),6116
+(CHICAGO, ILLINOIS,CERTIFIED,2012),5671
+(ATLANTA, GEORGIA,CERTIFIED,2012),5565
+
+year 2015
+
+(NEW YORK, NEW YORK,CERTIFIED,2016),34639
+(SAN FRANCISCO, CALIFORNIA,CERTIFIED,2016),13836
+(HOUSTON, TEXAS,CERTIFIED,2016),13655
+(ATLANTA, GEORGIA,CERTIFIED,2016),11678
+(CHICAGO, ILLINOIS,CERTIFIED,2016),11064
+
+year 2014
+
+(NEW YORK, NEW YORK,CERTIFIED,2015),31266
+(HOUSTON, TEXAS,CERTIFIED,2015),15242
+(SAN FRANCISCO, CALIFORNIA,CERTIFIED,2015),12594
+(ATLANTA, GEORGIA,CERTIFIED,2015),10500
+(SAN JOSE, CALIFORNIA,CERTIFIED,2015),9589
+
+year 2013
+
+(NEW YORK, NEW YORK,CERTIFIED,2014),27634
+(HOUSTON, TEXAS,CERTIFIED,2014),13360
+(SAN FRANCISCO, CALIFORNIA,CERTIFIED,2014),9798
+(SAN JOSE, CALIFORNIA,CERTIFIED,2014),8223
+(ATLANTA, GEORGIA,CERTIFIED,2014),8213
+
+year 2012
+
+(NEW YORK, NEW YORK,CERTIFIED,2013),23537
+(HOUSTON, TEXAS,CERTIFIED,2013),11136
+(SAN FRANCISCO, CALIFORNIA,CERTIFIED,2013),7281
+(SAN JOSE, CALIFORNIA,CERTIFIED,2013),6722
+(ATLANTA, GEORGIA,CERTIFIED,2013),6377
+
+year 2011
+
+(NEW YORK, NEW YORK,CERTIFIED,2011),23172
+(HOUSTON, TEXAS,CERTIFIED,2011),8184
+(CHICAGO, ILLINOIS,CERTIFIED,2011),5188
+(SAN JOSE, CALIFORNIA,CERTIFIED,2011),4713
+(SAN FRANCISCO, CALIFORNIA,CERTIFIED,2011),4711
