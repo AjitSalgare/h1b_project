@@ -1,0 +1,57 @@
+1.mysql –u root –p
+2. create database h1b_data;
+3. use h1b_data;
+4.CREATE TABLE q10_rate(job_title varchar(100)NOT NULL,total_no_of_appl INT NOT NULL,certifiedANDcertified_withdrwan_count INT NOT NULL,
+5.desc q10_rate;
+ +---------------------------------------+--------------+------+-----+---------+-------+
+| field                                 | type         | null | key | default | extra |
++---------------------------------------+--------------+------+-----+---------+-------+
+| job_title                             | varchar(100) | no   |     | null    |       |
+| total_no_of_appl                      | int(11)      | no   |     | null    |       |
+| certifiedandcertified_withdrwan_count | int(11)      | no   |     | null    |       |
+| success_rate                          | float        | no   |     | null    |       |
++---------------------------------------+--------------+------+-----+---------+-------+
+
+6.Start sqoop…..connect to msql>h1b_data database
+sqoop list-tables --connect jdbc:mysql://localhost/h1b_data --username root --password 'hduser'
+
+7. export data from hdfs to msql >q10_rate table
+sqoop export --connect jdbc:mysql://localhost/h1b_data --username 'root' --password 'hduser' --table q10_rate --export-dir /problem10 --input-fields-terminated-by ',' --mysql-delimiters -m 1;
+
+
+
+
+
++------------------------------------------------------------+------------------+---------------------------------------+--------------+
+| PRODUCTION SUPPORT LEAD - US                               |             1301 |                                  1301 |          100 |
+| ASSOCIATE CONSULTANT - US                                  |             4393 |                                  4390 |      99.9317 |
+| SYSTEMS ENGINEER - US                                      |            10036 |                                 10026 |      99.9004 |
+| TEST ENGINEER - US                                         |             2198 |                                  2195 |      99.8635 |
+| PRODUCTION SUPPORT ANALYST - US                  |             1451 |                                  1449 |      99.8622 |
+| TEST ANALYST - US                                          |             4958 |                                  4949 |      99.8185 |
+| CONSULTANT - US                                            |             7426 |                                  7412 |      99.8115 |
+| TECHNOLOGY LEAD - US                                       |            28350 |                                 28294 |      99.8025 |
+| TECHNICAL TEST LEAD - US                                   |             5374 |                                  5363 |      99.7953 |
+| SENIOR TECHNOLOGY ARCHITECT - US                           |             1417 |                                  1414 |      99.7883 |
+| TECHNOLOGY ARCHITECT - US                                  |             4707 |                                  4696 |      99.7663 |
+| TECHNOLOGY ANALYST - US                                    |            26055 |                                 25993 |       99.762 |
+| SENIOR PROJECT MANAGER - US                                |             2774 |                                  2767 |      99.7477 |
+| DEVELOPER USER INTERFACE                                   |             5247 |                                  5232 |      99.7141 |
+| COMPUTER SYSTEMS ANALYST 2                                 |             4031 |                                  4019 |      99.7023 |
+| SYSTEMS ANALYST - II                                       |             1339 |                                  1335 |      99.7013 |
+| PROJECT MANAGER - III                                      |             1651 |                                  1646 |      99.6972 |
+| PROJECT MANAGER - US                                       |             7046 |                                  7024 |      99.6878 |
+| PROGRAMMER ANALYST - II                                    |             3588 |                                  3576 |      99.6656 |
+| LEAD CONSULTANT - US                                       |             3402 |                                  3390 |      99.6473 |
+| COMPUTER SYSTEMS ANALYST 3                                 |             2170 |                                  2161 |      99.5853 |
+| COMPUTER PROGRAMMER/CONFIGURER 2                           |             6729 |                                  6700 |       99.569 |
+| PROGRAMMER ANALYST - I                                     |             1432 |                                  1425 |      99.5112 |
+| SYSTEMS ANALYST - III                                      |             1006 |                                  1001 |       99.503 |
+| PRINCIPAL CONSULTANT - US                                  |             1352 |                                  1345 |      99.4822 |
+| COMPUTER SPECIALIST/TESTING AND QUALITY ANALYST 2          |             3998 |                                  3975 |      99.4247 |
+| COMPUTER PROGRAMMER/CONFIGURER 3                           |             1145 |                                  1138 |      99.3886 |
+| COMPUTER SPECIALIST/SYSTEM SUPPORT AND DEVELOPMENT         |             1339 |                                  1330 |      99.3279 |
+| COMPUTER SPECIALIST/SYSTEM SUPPORT AND DEVELOPMENT ADMIN 2 |             1085 |                                  1077 |      99.2627 |
+| DATA WAREHOUSE SPECIALIST                                  |             1631 |                                  1618 |      99.2029 |
+
+
